@@ -1,0 +1,23 @@
+class Solution {
+    public boolean hasAllCodes(String s, int k) {
+        StringBuilder sb=new StringBuilder();
+        int needed = 1 << k; 
+        HashSet<String> set=new HashSet<>();
+        int l=0;
+        int n=s.length();
+        int r=0;
+        while(r<n){
+            sb.append(s.charAt(r));
+            while(r-l+1==k){
+                set.add(sb.toString());
+                sb.deleteCharAt(0);
+                l++;
+            }
+            r++;
+        }
+        return set.size()==needed;
+    }
+}
+
+Time Complexity=O(n⋅k);
+HashSet space=O(k⋅2k);

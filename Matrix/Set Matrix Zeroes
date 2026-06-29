@@ -1,0 +1,75 @@
+//brute force
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int n=matrix.length;
+        int m=matrix[0].length;
+        int[][] arr=new int[n][m];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(matrix[i][j]==0){
+                    arr[i][j]=-1;
+                }
+            }
+        }
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(arr[i][j]==-1){
+                    setrow(i,matrix,m);
+                    setcol(j,matrix,n);
+                }
+            }
+        }
+    }
+    public void setrow(int row,int[][] matrix,int m){
+        for(int i=0;i<m;i++){
+            matrix[row][i]=0;
+        }
+    }
+    public void setcol(int col,int[][] matrix,int n){
+        for(int i=0;i<n;i++){
+            matrix[i][col]=0;
+        }
+    }
+}
+tc-->o(n*m)+o(n*m)(n+m);
+sc-->o(n*m);
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int n=matrix.length;
+        int m=matrix[0].length;
+        int[] col=new int[m];
+        int[] row=new int[n];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(matrix[i][j]==0){
+                    col[j]=-1;
+                    row[i]=-1;
+                }
+            }
+        }
+       for(int i=0;i<n;i++){
+            if(row[i]==-1){
+                setrow(i,matrix,m);
+            }
+        }
+        for(int i=0;i<m;i++){
+            if(col[i]==-1){
+                setcol(i,matrix,n);
+            }
+        }
+    }
+    public void setrow(int row,int[][] matrix,int m){
+        for(int i=0;i<m;i++){
+            matrix[row][i]=0;
+        }
+    }
+    public void setcol(int col,int[][] matrix,int n){
+        for(int i=0;i<n;i++){
+            matrix[i][col]=0;
+        }
+    }
+}
+Total Time Complexity
+O(n×m)+O(n×m)+O(n×m)=O(n×m)
+sc-->o(n+m)

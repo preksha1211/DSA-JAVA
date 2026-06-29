@@ -1,0 +1,53 @@
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode temp=head;
+        int cnt=0;
+        while(temp!=null){
+            cnt++;
+            temp=temp.next;
+        }
+        if (n == cnt) {
+            return head.next; //plz take care of edge cases
+        }
+        temp=head;
+        for(int i=0;i<cnt-n-1;i++){
+            temp=temp.next;
+        }
+        ListNode del=temp.next;
+        temp.next=del.next;
+        return head;
+
+    }
+}
+..tc-->O(N)+O(N);
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        // Create a dummy node to handle edge cases easily
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+
+        // Initialize two pointers
+        ListNode fast = dummy;
+        ListNode slow = dummy;
+
+        // Move fast pointer n steps ahead
+        for (int i = 0; i < n; i++) {
+            fast = fast.next;
+        }
+
+        // Move both pointers until fast reaches the end
+        while (fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        // Remove the nth node from the end
+        slow.next = slow.next.next;
+
+        return dummy.next;
+    }
+}
+..O(n) + O(L - n) = O(L)

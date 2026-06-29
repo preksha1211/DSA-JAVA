@@ -1,0 +1,58 @@
+class DisjointSet{
+    List<Integer> parent=new ArrayList<>();
+    List<Integer> rank=new ArrayList<>();
+    DisjointSet(int n){
+        for(int i=0;i<=n;i++){
+            parent.add(i);
+            rank.add(0);
+        }
+    }
+    public int findParent(int node){
+        if(parent.get(node)==node){
+            return node;
+        }
+        int up=findParent(parent.get(node));
+        parent.set(node,up);
+        return up;
+    }
+    public void rankByUnion(int u,int v){
+        int uu=findParent(u);
+        int uv=findParent(v);
+        if(uu==uv) return;
+        if(rank.get(uu)>rank.get(uv)){
+            parent.set(uv,uu);
+        }
+        else if(rank.get(uu)<rank.get(uv)){
+            parent.set(uu,uv);
+        }
+        else{
+            parent.set(uv,uu);
+            int rr=rank.get(uu);
+            rank.set(uu,rr+1);
+        }
+    }
+}
+class Solution {
+    public int findCircleNum(int[][] isConnected) {
+       
+        int n=isConnected.length;
+        int m=isConnected[0].length;
+        DisjointSet ds=new DisjointSet(n);
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(isConnected[i][j]==1){
+                   ds.rankByUnion(i,j);
+
+                }
+            }
+        }
+        int cnt=0;
+        for(int i=0;i<n;i++){
+            if(ds.parent.get(i)==i){
+                cnt++;
+            }
+        }
+        return cnt;
+
+    }
+}

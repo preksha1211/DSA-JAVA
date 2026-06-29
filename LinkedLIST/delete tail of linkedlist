@@ -1,0 +1,20 @@
+class Solution {
+       
+    Node deleteNode(Node head) {
+        Node temp=head;
+        if(head==null|| head.next==null){
+            return null;//list has no elenent or has only one element
+            
+        }
+        Node temp=head;
+        while(temp.next.next!=null){
+           temp=temp.next;
+        }
+        
+        temp.next=null;
+        retun head;
+      
+           
+        
+    }
+}

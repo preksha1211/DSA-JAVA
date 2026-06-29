@@ -1,0 +1,98 @@
+(data replacement solution&& two pass solution)
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        if (head == null) return null;
+
+        List<Integer> ll = new ArrayList<>();
+
+        // Collect values at odd positions
+        ListNode temp = head;
+        while (temp != null && temp.next != null) {
+            ll.add(temp.val);
+            temp = temp.next.next;
+        }
+
+        // If there's a last odd node (when list length is odd)
+        if (temp != null) {
+            ll.add(temp.val);
+        }
+
+        // Collect values at even positions
+        temp = head.next;
+        while (temp != null && temp.next != null) {
+            ll.add(temp.val);
+            temp = temp.next.next;
+        }
+
+        // If there's a last even node (in even-length list)
+        if (temp != null) {
+            ll.add(temp.val);
+        }
+
+        // Rewrite the linked list with collected values
+        temp = head;
+        int i = 0;
+        while (temp != null) {
+            temp.val = ll.get(i++);
+            temp = temp.next;
+        }
+
+        return head;
+    }
+}
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        ListNode odd=new ListNode(-1);
+        ListNode oo=odd;
+        ListNode even=new ListNode(-1);
+        ListNode ee=even;
+        ListNode temp=head;
+        int cnt=1;
+
+        while(temp!=null){
+            if(cnt%2==1){
+                odd.next=temp;
+                odd=odd.next;
+            }
+            else{
+                even.next=temp;
+                even=even.next;
+            }
+            cnt++;
+            temp=temp.next;
+            
+        }
+        odd.next=ee.next;
+         even.next = null; 
+        return oo.next;
+        
+    }
+}
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        if(head==null || head.next==null){
+            return head;
+        }
+        ListNode even=head.next;
+        ListNode evenHead=head.next;
+        ListNode odd=head;
+        while(even!=null && even.next!=null){
+            
+            odd.next=odd.next.next;
+            even.next=even.next.next;
+            
+           
+            odd=odd.next;
+             even=even.next;
+        }
+        odd.next=evenHead;
+        return head;
+        
+    }
+}
+

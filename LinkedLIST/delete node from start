@@ -1,0 +1,22 @@
+/*
+class Node
+{
+    int data;
+    Node next;
+
+    Node(int d)
+    {
+        this.data = d;
+        this.next = null;
+    }
+}
+*/
+class Solution {
+       
+    Node deleteNode(Node head) {
+        Node temp=head;
+        head=head.next;
+        temp.next=null; //no needd to free the space garbahe collector take care of it
+        return head;   
+    }
+}

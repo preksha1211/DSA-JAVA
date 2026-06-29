@@ -1,0 +1,27 @@
+class Solution {
+    public int maxVowels(String s, int k) {
+        int n= s.length();
+        int maxi=0;
+        String vo="aeiou";
+        int l=0;
+        int r=0;
+        int cnt=0;
+        while(r<n){
+            char ch=s.charAt(r);
+            if(vo.indexOf(ch)!=-1){
+                cnt++;
+            }
+            while(r-l+1==k){
+                maxi=Math.max(maxi,cnt);
+                if(vo.indexOf(s.charAt(l))!=-1){
+                    cnt--;
+                }
+                l++;
+            }
+            r++;
+        }
+        return maxi;
+    }
+}
+tc-->o(n);
+sc-->o(1);

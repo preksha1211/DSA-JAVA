@@ -1,0 +1,28 @@
+class Solution {
+    public int[][] modifiedMatrix(int[][] matrix) {
+        int n=matrix.length;
+        int m=matrix[0].length;
+        int[][] ans=new int[n][m];
+        int[] maxidx=new int[m];
+        for(int i=0;i<m;i++){
+            int maxi=-1;
+            for(int j=0;j<n;j++){
+                if(maxi<matrix[j][i]){
+                    maxidx[i]=matrix[j][i];
+                    maxi=matrix[j][i];
+                }
+                 ans[j][i]=matrix[j][i];
+
+            }
+           
+        }
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(ans[j][i]==-1){
+                    ans[j][i]=maxidx[i];
+                }
+            }
+        }
+        return ans;
+    }
+}

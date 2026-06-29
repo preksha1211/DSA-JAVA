@@ -1,0 +1,23 @@
+lass Solution {
+    public double findMaxAverage(int[] nums, int k) {
+        int n=nums.length;
+        double sum=0;
+        double maxi=Double.MIN_VALUE;
+        int l=0;
+        int r=0;
+        while(r<n){
+           sum+=nums[r];
+           while(r-l+1==k){
+              double avg=sum/k;
+              maxi=Math.max(avg,maxi);
+              sum=sum-nums[l];
+              l++;
+           }
+           r++;
+        }
+        return maxi;
+
+    }
+}
+tc-->o(n);
+sc-->o(1);

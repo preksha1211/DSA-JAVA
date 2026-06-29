@@ -1,0 +1,19 @@
+class Solution {
+    void selectionSort(int[] arr) {
+        int n=arr.length;
+        int idx=-1;
+        for(int i=0;i<n;i++){
+            int mini=Integer.MAX_VALUE;
+            for(int j=i;j<n;j++){
+                if(arr[j]<mini){
+                    mini=arr[j];
+                    idx=j;
+                }
+            }
+            int temp=arr[idx];
+            arr[idx]=arr[i];
+            arr[i]=temp;
+        }
+        
+    }
+}

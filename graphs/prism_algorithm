@@ -1,0 +1,58 @@
+class Solution {
+    class pair {
+        int node;
+        int wt;
+
+        pair(int node, int wt) {
+            this.node = node;
+            this.wt = wt;
+        }
+    }
+
+    public int spanningTree(int V, int[][] edges) {
+        int n = V;
+        List<List<int[]>> adj = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            adj.add(new ArrayList<>());
+        }
+
+        for (int[] edge : edges) {
+            int u = edge[0];
+            int v = edge[1];
+            int wt = edge[2];
+            adj.get(u).add(new int[]{v, wt});
+            adj.get(v).add(new int[]{u, wt});
+        }
+
+        int sum = 0;
+
+        
+        PriorityQueue<pair> pq = new PriorityQueue<>((a, b) -> a.wt - b.wt);
+
+        int[] visited = new int[n];
+        pq.add(new pair(0, 0));
+
+        while (!pq.isEmpty()) {
+            pair pp = pq.poll();
+            int node = pp.node;
+            int wt = pp.wt;
+
+            if (visited[node] == 1) {
+                continue;
+            }
+
+            sum += wt;
+            visited[node] = 1;
+
+            for (int[] arr : adj.get(node)) {
+                int nn = arr[0];
+                int nw = arr[1];
+                if (visited[nn] == 0) {
+                    pq.add(new pair(nn, nw));
+                }
+            }
+        }
+
+        return sum;
+    }
+}

@@ -1,0 +1,59 @@
+class Solution {
+    class pair{
+        int node;
+        int par;
+        pair(int node,int par){
+            this.node=node;
+            this.par=par;
+        }
+    }
+    public boolean isCycle(int V, int[][] edges) {
+        int n=V;
+       List<List<Integer>> adj=new ArrayList<>();
+       for(int i=0;i<n;i++){
+           adj.add(new ArrayList<>());
+       }
+       for(int[] edge:edges){
+           int u=edge[0];
+           int v=edge[1];
+           adj.get(u).add(v);
+           adj.get(v).add(u);
+       }
+       int[] visited=new int[n+1];
+       for(int i=0;i<n;i++){
+           if(visited[i]==0){
+               if(bfs(i,visited,adj)==true){
+                   return true;
+               }
+           }
+       }
+       return false;
+    }
+    public boolean bfs(int i,int[] visited, List<List<Integer>> adj){
+       
+       Queue<pair> q=new LinkedList<>();
+       q.add(new pair(i,-1));
+       visited[i]=1;
+       while(!q.isEmpty()){
+           pair pp=q.poll();
+           int node=pp.node;
+           int par=pp.par;
+           for(int it:adj.get(node)){
+               if(visited[it]==0){
+                   visited[it]=1;
+                   q.add(new pair(it,node));
+               }
+               else{
+                   if(par!=it){
+                       return true;
+                   }
+               }
+           }
+       }
+       return false;
+        
+    }
+}
+
+tc-->o(v+e);
+sc-->o(v+e);

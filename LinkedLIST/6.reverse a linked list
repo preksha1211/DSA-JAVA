@@ -1,0 +1,61 @@
+reverse a linkedlist ina terms of data using stack and data replacement-->
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        Stack<Integer> st=new Stack<>();
+        ListNode temp=head;
+        while(temp!=null){
+            st.push(temp.val);
+            temp=temp.next;
+        }
+        temp=head;
+        while(temp!=null){
+            temp.val=st.pop();
+            temp=temp.next;
+        }
+        return head;
+    }
+}
+tc-->O(2N);
+sc-->O(N)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+iterative solution
+
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head==null||head.next==null){
+            return head;
+        }
+        ListNode prev=null;
+        ListNode temp=head;
+        while(temp!=null){
+            ListNode front=temp.next;
+            temp.next=prev;
+            prev=temp;
+            temp=front;
+        }
+        return prev;
+
+    }
+}
+
+tc-->O(N)
+SC-->O(1)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+recursive solution
+
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head==null||head.next==null){
+            return head;
+        }
+        ListNode newHead=reverseList(head.next);
+        ListNode front=head.next;
+        front.next=head;
+        head.next=null;
+        return newHead;
+        
+
+    }
+}
+tc-->O(N)
+sc-->O(N)-->recursion stack space
