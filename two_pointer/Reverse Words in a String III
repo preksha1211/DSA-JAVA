@@ -1,0 +1,29 @@
+class Solution {
+    public String reverseWords(String s) {
+        int i=0;
+        int j=0;
+        int n=s.length();
+        StringBuilder sb=new StringBuilder(s);
+        for(int k=0;k<n;k++){
+            if(sb.charAt(k) == ' '){
+                j=k-1;
+                reverse(i,j,sb);
+                i=k+1;
+            }
+
+        }
+        reverse(i,n-1,sb);
+        return sb.toString();
+        
+    }
+    public void reverse(int i,int j,StringBuilder sb){
+        while(i<j){
+            char temp=sb.charAt(i);
+            sb.setCharAt(i,sb.charAt(j));
+             sb.setCharAt(j,temp);
+             i++;
+             j--;
+        }
+    }
+
+}
