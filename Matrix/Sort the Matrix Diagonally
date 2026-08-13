@@ -1,24 +1,29 @@
 class Solution {
     public int[][] diagonalSort(int[][] mat) {
-        HashMap<Integer,List<Integer>> map=new HashMap<>();
         int n=mat.length;
         int m=mat[0].length;
+        HashMap<Integer, List<Integer>> map=new HashMap<>();
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
                 int idx=i-j;
-                map.putIfAbsent(idx,new ArrayList<>());
-                map.get(idx).add(mat[i][j]);
+                if(map.containsKey(idx)){
+                    map.get(idx).add(mat[i][j]);
+                }
+                else{
+                    List<Integer> ll=new ArrayList<>();
+                    ll.add(mat[i][j]);
+                    map.put(idx,ll);
+                }
             }
         }
-       for (List<Integer> it : map.values()) {
-            Collections.sort(it);
+        for(List<Integer> ll : map.values()){
+            Collections.sort(ll);
+
         }
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
-                int idx=i-j;
-                mat[i][j]=map.get(idx).get(0);
-                List<Integer> ll=map.get(idx);
-                ll.remove(0);
+        for(int i=n-1;i>=0;i--){
+            for(int j=m-1;j>=0;j--){
+                List<Integer> ll=map.get(i-j);
+                mat[i][j]=ll.remove(ll.size()-1);
             }
         }
         return mat;
