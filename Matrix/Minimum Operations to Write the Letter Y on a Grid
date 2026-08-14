@@ -1,0 +1,48 @@
+class Solution {
+    public int minimumOperationsToWriteY(int[][] grid) {
+        int outsideCount=0;
+        int yCount=0;
+        int n=grid.length;
+        int[] freqY=new int[3];
+        int[] freq=new int[3];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                int ele=grid[i][j];
+                if(i<n/2 &&(i==j || i+j==n-1)){
+                    freqY[ele]++;
+                    yCount++;
+                }
+                else if(i>=n/2 && j==n/2){
+                    freqY[ele]++;
+                    yCount++;
+                }
+                else{
+                    freq[ele]++;
+                    outsideCount++;
+                }
+            }
+
+
+
+        }
+       int mini = Integer.MAX_VALUE;
+
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+
+                if(i != j){
+
+             int operations =
+                (outsideCount - freq[i]) +
+                (yCount - freqY[j]);
+
+            mini = Math.min(mini, operations);
+        }
+        
+        
+    }
+}
+return mini;
+        
+    }
+}
