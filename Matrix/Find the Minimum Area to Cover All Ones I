@@ -1,0 +1,29 @@
+class Solution {
+    public int minimumArea(int[][] grid) {
+        int n=grid.length;
+        int m=grid[0].length;
+        int fr=n;
+        int fc=m;
+        int lr=-1;
+        int lc=-1;
+        
+        
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]==1){
+                        fr=Math.min(fr,i);
+                        lr=Math.max(lr,i);
+                        fc=Math.min(fc,j);
+                        lc=Math.max(lc,j);
+                }
+               
+            }
+            
+        }
+        
+        return (lr-fr+1)*(lc-fc+1);
+          
+
+    }
+}
