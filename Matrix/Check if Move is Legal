@@ -1,0 +1,32 @@
+class Solution {
+    public boolean checkMove(char[][] board, int rMove, int cMove, char color) {
+        // Opponent's color
+        char opponent = (color == 'B') ? 'W' : 'B';
+
+        // Directions: 8 total (N, NE, E, SE, S, SW, W, NW)
+        int[][] directions = {
+            {-1, 0}, {-1, 1}, {0, 1}, {1, 1},
+            {1, 0}, {1, -1}, {0, -1}, {-1, -1}
+        };
+
+        for (int[] dir : directions) {
+            int i = rMove + dir[0];
+            int j = cMove + dir[1];
+            int count = 0;
+
+            // Must start with at least one opponent piece
+            while (i >= 0 && i < 8 && j >= 0 && j < 8 && board[i][j] == opponent) {
+                i += dir[0];
+                j += dir[1];
+                count++;
+            }
+
+            // After opponent chain, must end with own color
+            if (count > 0 && i >= 0 && i < 8 && j >= 0 && j < 8 && board[i][j] == color) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
