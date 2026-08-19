@@ -1,0 +1,29 @@
+class Solution {
+    public List<Integer> luckyNumbers(int[][] matrix) {
+        List<Integer> ll=new ArrayList<>();
+        int n=matrix.length;
+        int m=matrix[0].length;
+       HashSet<Integer> set=new HashSet<>();
+        for(int i=0;i<n;i++){
+            int mini=Integer.MAX_VALUE;
+            for(int j=0;j<m;j++){
+                mini=Math.min(mini,matrix[i][j]);
+            }
+            set.add(mini);
+        }
+        for(int j=0;j<m;j++){
+            int maxi=Integer.MIN_VALUE;
+            for(int i=0;i<n;i++){
+                maxi=Math.max(maxi,matrix[i][j]);
+            }
+            if(set.contains(maxi)){
+                ll.add(maxi);
+
+            }
+            
+        }
+        return ll;
+
+
+    }
+}
