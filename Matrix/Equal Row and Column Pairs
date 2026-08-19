@@ -1,0 +1,28 @@
+class Solution {
+    public int equalPairs(int[][] grid) {
+        int n=grid.length;
+        int ans=0;
+        for(int i=0;i<n;i++){
+            int colele=grid[i][0];
+            for(int j=0;j<n;j++){
+                int rowele=grid[0][j];
+                if(colele==rowele){
+                    if(check(i,j,grid,n)){
+                        ans++;
+                    }
+                }
+
+            }
+        }
+        return ans;
+    }
+    public boolean check(int row,int col,int[][] grid,int n){
+        for(int i=0;i<n;i++){
+            if(grid[row][i]!=grid[i][col]){
+                return false;
+            }
+        }
+        return true;
+
+    }
+}
