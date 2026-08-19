@@ -1,0 +1,26 @@
+class Solution {
+    public int diagonalPrime(int[][] nums) {
+        int n=nums.length;
+        int ans=0;
+        for(int i=0;i<n;i++){
+            if(check(nums[i][i])){
+                  ans=Math.max(ans,nums[i][i]);
+            }
+            if(check(nums[i][n-i-1])){
+                ans=Math.max(ans,nums[i][n-i-1]);
+
+            }
+        }
+        return ans;
+        
+    }
+    public boolean check(int ele){
+        if (ele<= 1) return false;
+        for(int i=2;i<= Math.sqrt(ele);i++){
+              if(ele%i==0){
+                return false;
+              }
+        }
+        return true;
+    }
+}
