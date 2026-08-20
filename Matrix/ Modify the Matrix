@@ -5,7 +5,8 @@ class Solution {
         int[][] ans=new int[n][m];
         int[] maxidx=new int[m];
         for(int i=0;i<m;i++){
-            int maxi=-1;
+
+            int maxi=-2;
             for(int j=0;j<n;j++){
                 if(maxi<matrix[j][i]){
                     maxidx[i]=matrix[j][i];
