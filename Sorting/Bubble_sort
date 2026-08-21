@@ -16,3 +16,4 @@ class Solution {
         arr[i]=temp;
     }
 }
+tc-o(n2)
